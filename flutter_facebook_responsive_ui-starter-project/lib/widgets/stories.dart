@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook_responsive_ui/widgets/widgets.dart';
 
 import '../config/palette.dart';
-import '../config/palette.dart';
 import '../models/models.dart';
 
 class Stories extends StatelessWidget {
