@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_responsive_ui/config/palette.dart';
 import 'package:flutter_facebook_responsive_ui/models/models.dart';
 import 'package:flutter_facebook_responsive_ui/widgets/profile_avatar.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class PostContainer extends StatelessWidget {
   final Post post;
@@ -99,6 +101,117 @@ class _PostStat extends StatelessWidget {
   const _PostStat({Key key, @required this.post}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      children: [
+        Row(
+          children: [
+            Container(
+              padding: EdgeInsets.all(5.0),
+              decoration: BoxDecoration(
+                color: Palette.facebookBlue,
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.thumb_up,
+                color: Colors.white,
+                size: 10.0,
+              ),
+            ),
+            const SizedBox(width: 4.0),
+            Expanded(
+              child: Text(
+                '${post.likes}',
+                style: TextStyle(
+                  color: Colors.grey[600],
+                ),
+              ),
+            ),
+            Text(
+              '${post.comments} Comments',
+              style: TextStyle(
+                color: Colors.grey[600],
+              ),
+            ),
+            const SizedBox(width: 8.0),
+            Text(
+              '${post.shares} Shares',
+              style: TextStyle(
+                color: Colors.grey[600],
+              ),
+            ),
+          ],
+        ),
+        const Divider(),
+        Row(
+          children: [
+            _PostButton(
+              icon: Icon(
+                MdiIcons.thumbUpOutline,
+                size: 20.0,
+                color: Colors.grey[600],
+              ),
+              label: 'Like',
+              onTap: () => print('Like'),
+            ),
+            _PostButton(
+              icon: Icon(
+                MdiIcons.commentOutline,
+                size: 20.0,
+                color: Colors.grey[600],
+              ),
+              label: 'Comments',
+              onTap: () => print('Comments'),
+            ),
+            _PostButton(
+              icon: Icon(
+                MdiIcons.shareOutline,
+                size: 25.0,
+                color: Colors.grey[600],
+              ),
+              label: 'Share',
+              onTap: () => print('Share'),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _PostButton extends StatelessWidget {
+  final Icon icon;
+  final String label;
+  final Function onTap;
+
+  const _PostButton(
+      {Key key,
+      @required this.icon,
+      @required this.label,
+      @required this.onTap})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Material(
+        color: Colors.white,
+        child: InkWell(
+          onTap: onTap,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 12.0),
+            height: 25,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                icon,
+                const SizedBox(
+                  width: 4.0,
+                ),
+                Text(label),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
